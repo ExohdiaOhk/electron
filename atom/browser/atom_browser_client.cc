@@ -32,6 +32,7 @@
 #include "atom/browser/web_contents_permission_helper.h"
 #include "atom/browser/web_contents_preferences.h"
 #include "atom/browser/window_list.h"
+#include "atom/common/atom_version.h"
 #include "atom/common/options_switches.h"
 #include "atom/common/platform_util.h"
 #include "base/command_line.h"
@@ -47,6 +48,7 @@
 #include "base/strings/utf_string_conversions.h"
 #include "base/task/post_task.h"
 #include "chrome/browser/browser_process.h"
+#include "chrome/common/chrome_version.h"
 #include "components/net_log/chrome_net_log.h"
 #include "content/public/browser/browser_ppapi_host.h"
 #include "content/public/browser/browser_task_traits.h"
@@ -61,6 +63,7 @@
 #include "content/public/common/content_switches.h"
 #include "content/public/common/service_names.mojom.h"
 #include "content/public/common/url_constants.h"
+#include "content/public/common/user_agent.h"
 #include "content/public/common/web_preferences.h"
 #include "electron/buildflags/buildflags.h"
 #include "electron/grit/electron_resources.h"
@@ -883,6 +886,16 @@ bool AtomBrowserClient::ShouldBypassCORB(int render_process_id) const {
   base::AutoLock auto_lock(process_preferences_lock_);
   auto it = process_preferences_.find(render_process_id);
   return it != process_preferences_.end() && !it->second.web_security;
+}
+
+std::string AtomBrowserClient::GetProduct() const {
+  return "Chrome/" CHROME_VERSION_STRING;
+}
+
+std::string AtomBrowserClient::GetUserAgent() const {
+  return content::BuildUserAgentFromProduct("Chrome/" CHROME_VERSION_STRING
+                                            " " ATOM_PRODUCT_NAME
+                                            "/" ATOM_VERSION_STRING);
 }
 
 std::string AtomBrowserClient::GetApplicationLocale() {
