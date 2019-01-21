@@ -5,7 +5,7 @@ Date: Thu Dec 6 02:00:06 2018 +0000
 Backport fed67899a7b44c9409e94442eaca0deab2f809e3 to fix build on arm64.
 https://swiftshader.googlesource.com/SwiftShader.git/+/fed67899a7b44c9409e94442eaca0deab2f809e3%5E%21/
 
-Can be removed after updating to Chrome 72.
+Can be removed after updating to Chrome 73.
 
 diff --git a/src/Reactor/BUILD.gn b/src/Reactor/BUILD.gn
 index c983c4361..be5e5055d 100644
