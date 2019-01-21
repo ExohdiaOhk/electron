@@ -16,11 +16,11 @@
 
 namespace {
 
-std::string MediaStreamTypeToString(content::MediaStreamType type) {
+std::string MediaStreamTypeToString(blink::MediaStreamType type) {
   switch (type) {
-    case content::MediaStreamType::MEDIA_DEVICE_AUDIO_CAPTURE:
+    case blink::MediaStreamType::MEDIA_DEVICE_AUDIO_CAPTURE:
       return "audio";
-    case content::MediaStreamType::MEDIA_DEVICE_VIDEO_CAPTURE:
+    case blink::MediaStreamType::MEDIA_DEVICE_VIDEO_CAPTURE:
       return "video";
     default:
       return "unknown";
@@ -145,7 +145,7 @@ void WebContentsPermissionHelper::RequestOpenExternalPermission(
 
 bool WebContentsPermissionHelper::CheckMediaAccessPermission(
     const GURL& security_origin,
-    content::MediaStreamType type) const {
+    blink::MediaStreamType type) const {
   base::DictionaryValue details;
   details.SetString("securityOrigin", security_origin.spec());
   details.SetString("mediaType", MediaStreamTypeToString(type));
